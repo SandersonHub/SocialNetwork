@@ -8,7 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Download the code.
 2. Open your favorite coding program.
-3. Run the program through the terminal!
+3. Open the terminal.
+4. Run "NPM Install"
+5. Run "NPM Start"
 
 ### Installing
 
@@ -18,7 +20,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Please use the Github direct application link to access the code base.
 
-[Github Direct Link](https://github.com/SandersonHub/social-network-working)
+[Github Direct Link](https://github.com/SandersonHub/SocialNetwork)
 
 video walk through
 
