@@ -103,7 +103,7 @@ const userControl = {
             return User.updateMany( //updates several docs at once
                 { _id: { $in: getAllUserData.friends } }, //collects all data from friends
                 { $pull: { friends: params.userId } } //pulls user ID from friends array
-            ).then(() => {d
+            ).then(() => {
                 //deletes user's thought from the ID
                 return Thought.deleteMany({ username: getAllUserData.username });
             });

@@ -5,12 +5,8 @@ const thoughtControl = {
     getAllThoughts(req, res) {
         Thought.find({})
             .then(dbThoughtData => 
-
-
                 //return all thoughts
                 res.json(dbThoughtData))
-
-
             //error checking
             .catch(err => {
                 res.status(400).json(err);
@@ -37,7 +33,6 @@ const thoughtControl = {
                     res.status(404).json({ message: 'No ID' });
                     return;
                 }
-
                 // send json
                 res.json(dbThoughtData);
             })
