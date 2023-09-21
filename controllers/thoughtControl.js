@@ -70,14 +70,14 @@ const thoughtControl = {
                     }
                 );
             })
-            .then(dbUsersData => {
-                if (!dbUsersData) {
+            .then(userDb => {
+                if (!userDb) {
                     res.status(404).json({
                         message: 'No ID'
                     });
                     return;
                 }
-                res.json(dbUsersData)
+                res.json(userDb)
             })
 
             //error checking
