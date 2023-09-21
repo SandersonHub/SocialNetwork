@@ -13,7 +13,6 @@ const thoughtControl = {
 
             //error checking
             .catch(err => {
-                console.log(err);
                 res.status(400).json(err);
             });
     },
@@ -45,7 +44,6 @@ const thoughtControl = {
 
             //error checking
             .catch(err => {
-                console.log(err);
                 res.status(400).json(err);
             });
     },
@@ -54,38 +52,37 @@ const thoughtControl = {
     addThought({ body }, res) {
         Thought.create(body)
         //create thought
-            .then((ThoughtData) => {
-                return User.findOneAndUpdate(
-                    //create a thought using current user
-                    {
-                        _id: body.userId
-                    }, {
-                        //addtoset is a mongoDB operator
-                        $addToSet: {
-                            //push the thought to the user
-                            thoughts: ThoughtData._id
-                        }
-                    }, {
-                        new: true
+        .then((ThoughtData) => {
+            return User.findOneAndUpdate(
+        //create a thought using current user
+            {
+            id: body.userId
+            }, {
+                    //addtoset is a mongoDB operator
+                    $addToSet: {
+                        //push the thought to the user
+                        thoughts: ThoughtData._id
                     }
-                );
-            })
-            .then(userDb => {
-                if (!userDb) {
-                    res.status(404).json({
-                        message: 'No ID'
-                    });
-                    return;
+                }, {
+                    new: true
                 }
-                res.json(userDb)
-            })
+            );
+        })
+        .then(userDb => {
+            if (!userDb) {
+                res.status(404).json({
+                    message: 'No ID'
+                });
+                return;
+            }
+            res.json(userDb)
+        })
 
-            //error checking
-            .catch(err => {
-                console.log(err);
-                res.status(400).json(err);
-            });
-    },
+        //error checking
+        .catch(err => {
+            res.status(400).json(err);
+        });
+},
 
     //update thought by id
     updateThought({ params, body }, res) {
@@ -180,31 +177,31 @@ const thoughtControl = {
     // Delete a reaction
     removeReaction({ params }, res) {
         Thought.findOneAndUpdate({_id: params.thoughtId},
-                //allows to remove the reaction by id
-                {
-                    //pull the reaction
-                    $pull: {
-                        //reactions array
-                        reactions: {
-                            reactionId: params.reactionId
-                        }
-                    }
-                }, {
-                    new: true
+        //allows to remove the reaction by id
+        {
+            //pull the reaction
+            $pull: {
+                //reactions array
+                reactions: {
+                    reactionId: params.reactionId
                 }
-            )
-            .then((thought) => {
-                if (!thought) {
-                    res.status(404).json({
-                        message: 'No reaction found on this id!'
-                    });
-                    return;
-                }
-                res.json(thought)
-                //catch error
-            })
-            .catch(err => res.json(err));
-    },
+            }
+        }, {
+            new: true
+        }
+    )
+    .then((thought) => {
+        if (!thought) {
+            res.status(404).json({
+                message: 'No reaction found on this id!'
+            });
+            return;
+        }
+        res.json(thought)
+        //catch error
+    })
+    .catch(err => res.json(err));
+},
 }
 
 //export thoughtControl

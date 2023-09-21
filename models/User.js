@@ -6,13 +6,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    trim: true,
+    trim: true, //removes spaces before and after the string
   },
   //email string
   email: {
     type: String,
-    required: true,
-    unique: true,
+    required: true, //requires the email
+    unique: true, //unique email
   },
   thoughts: [
     {
