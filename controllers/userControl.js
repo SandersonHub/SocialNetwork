@@ -1,8 +1,8 @@
 const {User} = require('../models');
 
 const userControl = {
-    //get all users
-    getAllUsers(req, res) {
+    //get users
+    getUsers(req, res) {
         User.find({})
         //populates reference doc in mongoDB
         .populate({
@@ -22,9 +22,9 @@ const userControl = {
                 _id: -1
             })
             //
-            .then(getAllUserData => 
+            .then(getUserData => 
                 //returns user data
-                res.json(getAllUserData))
+                res.json(getUserData))
 
             //catch error
             .catch(err => {
@@ -152,7 +152,7 @@ const userControl = {
     },
 
 // remove the friend
-removeFriend(req, res) {
+deleteFriend(req, res) {
     //para's for request
     const { params } = req;
 
